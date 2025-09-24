@@ -1,7 +1,8 @@
-const { defineConfig } = require('cypress')
+const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
@@ -16,4 +17,4 @@ module.exports = defineConfig({
       timestamp: 'mmddyyyy_HHMMss',
     },
   },
-})
+});
