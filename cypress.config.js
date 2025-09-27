@@ -2,9 +2,9 @@ const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      return config;
     },
     baseUrl: 'http://localhost:3000/',
     video: true,
