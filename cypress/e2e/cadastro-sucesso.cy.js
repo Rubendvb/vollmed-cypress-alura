@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 describe('Página de cadastro', () => {
   beforeEach(() => {
     cy.visit('/');
