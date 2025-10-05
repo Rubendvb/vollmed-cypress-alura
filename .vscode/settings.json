@@ -1,0 +1,8 @@
+{
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": false,
+  "eslint.format.enable": false,
+  "javascript.format.enable": false,
+  "javascript.preferences.quoteStyle": "double",
+  "prettier.semi": false
+}
