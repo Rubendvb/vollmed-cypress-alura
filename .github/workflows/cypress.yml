@@ -8,6 +8,9 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        containers: [1, 2]
 
     steps:
       - name: Checkout
@@ -79,3 +82,7 @@ jobs:
             cypress/e2e/dashboard.cy.js
 
           wait-on: 'http://localhost:3000,http://localhost:8080'
+          record: true
+          parallel: true
+          ci-build-id: ${{ github.sha }}-${{ matrix.containers }}
+          group: ${{ matrix.containers }}-containers
