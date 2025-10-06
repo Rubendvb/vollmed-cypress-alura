@@ -82,7 +82,7 @@ jobs:
             cypress/e2e/dashboard.cy.js
 
           wait-on: 'http://localhost:3000,http://localhost:8080'
-          record: true
+          # record: true
           parallel: true
           ci-build-id: ${{ github.sha }}-${{ matrix.containers }}
           group: ${{ matrix.containers }}-containers
