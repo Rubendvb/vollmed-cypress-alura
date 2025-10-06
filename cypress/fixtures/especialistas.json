@@ -3,7 +3,7 @@
     {
       "nome": "Ana Oliveira",
       "email": "ana.oliveira@example.com",
-      "senha": "abcd1234",
+      "password": "abcd1234",
       "especialidade": "pediatria",
       "crm": 9876543,
       "telefone": "(123) 456-7890",
@@ -17,7 +17,7 @@
     {
       "nome": "Carlos Santos",
       "email": "carlos.santos@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 1234567,
       "telefone": "(987) 654-3210",
@@ -31,7 +31,7 @@
     {
       "nome": "Maria Silva",
       "email": "maria.silva@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 2345678,
       "telefone": "(987) 654-3210",
@@ -45,7 +45,7 @@
     {
       "nome": "José Santos",
       "email": "jose.santos@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 3456789,
       "telefone": "(987) 654-3210",
@@ -59,7 +59,7 @@
     {
       "nome": "Ana Souza",
       "email": "ana.souza@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 4567890,
       "telefone": "(987) 654-3210",
@@ -73,7 +73,7 @@
     {
       "nome": "Pedro Oliveira",
       "email": "pedro.oliveira@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 5678901,
       "telefone": "(987) 654-3210",
@@ -87,7 +87,7 @@
     {
       "nome": "Fernanda Costa",
       "email": "fernanda.costa@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 6789012,
       "telefone": "(987) 654-3210",
@@ -101,7 +101,7 @@
     {
       "nome": "Rafael Almeida",
       "email": "rafael.almeida@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 7890123,
       "telefone": "(987) 654-3210",
@@ -115,7 +115,7 @@
     {
       "nome": "Carla Rodrigues",
       "email": "carla.rodrigues@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 8901234,
       "telefone": "(987) 654-3210",
@@ -129,7 +129,7 @@
     {
       "nome": "Marcos Santos",
       "email": "marcos.santos@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 9012345,
       "telefone": "(987) 654-3210",
@@ -143,7 +143,7 @@
     {
       "nome": "Cristina Lima",
       "email": "cristina.lima@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 1234567,
       "telefone": "(987) 654-3210",
@@ -157,7 +157,7 @@
     {
       "nome": "Fábio Oliveira",
       "email": "fabio.oliveira@example.com",
-      "senha": "senha123",
+      "password": "password123",
       "especialidade": "ginecologia",
       "crm": 2345678,
       "telefone": "(987) 654-3210",

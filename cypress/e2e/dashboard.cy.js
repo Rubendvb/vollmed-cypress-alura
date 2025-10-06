@@ -1,7 +1,7 @@
 describe('Usuário logado na página de dashboard', () => {
   beforeEach(() => {
     cy.fixture('especialistas.json').as('especialistas');
-    cy.login(Cypress.env('email'), Cypress.env('senha'));
+    cy.login(Cypress.env('email'), Cypress.env('password'));
   });
 
   context('Redirecionamento na página de dashboard', () => {
@@ -44,7 +44,7 @@ describe('Usuário logado na página de dashboard', () => {
         cy.cadastraEspecialista(
           especialista.nome,
           especialista.email,
-          especialista.senha,
+          especialista.password,
           especialista.especialidade,
           especialista.crm,
           especialista.telefone,

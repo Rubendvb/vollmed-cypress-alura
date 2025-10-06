@@ -1,7 +1,7 @@
 describe('testes em API', () => {
   context('Testes em rotas com usuário autorizado', () => {
     beforeEach(() => {
-      cy.loginApi(Cypress.env('email'), Cypress.env('senha'));
+      cy.loginApi(Cypress.env('email'), Cypress.env('password'));
     });
 
     it('GET via url front para teste em resposta da home', () => {
@@ -18,7 +18,7 @@ describe('testes em API', () => {
   context('Requisições de usuário clínica em especialistas', () => {
     beforeEach(() => {
       cy.fixture('especialistas.json').as('especialistas');
-      cy.loginApi(Cypress.env('email'), Cypress.env('senha'));
+      cy.loginApi(Cypress.env('email'), Cypress.env('password'));
     });
 
     it('POSt em especialista', () => {
@@ -31,7 +31,7 @@ describe('testes em API', () => {
           body: {
             nome: especialista.nome,
             email: especialista.email,
-            senha: especialista.senha,
+            password: especialista.password,
             endereco: {
               cep: especialista.cep,
               rua: especialista.rua,

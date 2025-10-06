@@ -1,8 +1,8 @@
-Cypress.Commands.add('login', (email, senha) => {
-  cy.session([email, senha], () => {
+Cypress.Commands.add('login', (email, password) => {
+  cy.session([email, password], () => {
     cy.visit('/login');
     cy.get('[data-test="inputLoginEmail"]').type(email);
-    cy.get('[data-test="inputLoginSenha"]').type(senha, { log: false });
+    cy.get('[data-test="inputLoginSenha"]').type(password, { log: false });
     cy.get('[data-test="botaoTeste"]').should('be.visible');
     cy.get('[data-test="botaoTeste"]').click();
     cy.location('pathname').should('eq', '/dashboard');
@@ -14,7 +14,7 @@ Cypress.Commands.add(
   (
     nome,
     email,
-    senha,
+    password,
     especialidade,
     crm,
     imagem,
@@ -28,8 +28,8 @@ Cypress.Commands.add(
     cy.contains('Cadastrar especialista').should('be.visible').click();
     cy.get('[data-test="inputEspecialistaNome"]').type(nome);
     cy.get('[data-test="inputEspecialistaEmail"]').type(email);
-    cy.get('[data-test="inputEspecialistaSenha"]').type(senha);
-    cy.get('[data-test="inputEspecialistaSenhaVerificada"]').type(senha);
+    cy.get('[data-test="inputEspecialistaSenha"]').type(password);
+    cy.get('[data-test="inputEspecialistaSenhaVerificada"]').type(password);
     cy.get('[data-test="inputEspecialistaEspecialidade"]').type(especialidade);
     cy.get('[data-test="inputEspecialistaCRM"]').type(crm);
     cy.get('[data-test="inputEspecialistaImagem"]').type(imagem);
@@ -41,13 +41,13 @@ Cypress.Commands.add(
   }
 );
 
-Cypress.Commands.add('loginApi', (email, senha) => {
+Cypress.Commands.add('loginApi', (email, password) => {
   cy.request({
     method: 'POST',
     url: Cypress.env('api_login'),
     body: {
       email: email,
-      senha: senha,
+      password: password,
     },
   }).then((response) => {
     expect(response.status).to.eq(200);
