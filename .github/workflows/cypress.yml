@@ -11,57 +11,71 @@ jobs:
 
     steps:
       - name: Checkout
+
         uses: actions/checkout@v4
 
-      # O segundo checkout para "server" é redundante e pode ser removido.
-      # O primeiro checkout já baixa todo o repositório.
+      - name: Checkout
+
+        uses: actions/checkout@v4
+
+        with:
+          path: server
 
       - name: Start Server BackEnd
+
         run: |
+
+          cd server
+
           npm install
+
+          # Compile TypeScript first
           npm run compile
+
+          # Start server in background
           npm start &
-          
-          # Lógica para esperar o servidor (seu código original está bom)
+
+          # Wait for server to start with timeout
           echo "Waiting for server to start..."
           timeout=60
           counter=0
           until [ "$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)" == "200" ]; do
             if [ $counter -ge $timeout ]; then
               echo "Server failed to start within $timeout seconds"
+              echo "Checking server logs..."
+              ps aux | grep node
               exit 1
             fi
+            echo "Waiting for server to start... ($counter/$timeout)"
             sleep 2
             counter=$((counter + 2))
           done
+
           echo "Server is running successfully."
-        # A pasta de trabalho já é a raiz, então o comando de `cd` foi movido para o run
-        working-directory: ./server
-        env:
-          # ADICIONE AQUI AS VARIÁVEIS QUE SUA API PRECISA
-          # Substitua os nomes pelos seus secrets do GitHub
-          DATABASE_URL: ${{ secrets.DATABASE_URL }} # Exemplo
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}     # Exemplo
-          PORT: 8080
+
+        working-directory: server
 
       - name: Start Web App FrontEnd
+
         run: |
+
+          cd web
+
           npm install
+
           npm start &
-        working-directory: ./web
 
       - name: Run Cypress Tests
+
         uses: cypress-io/github-action@v6
+
         with:
           spec: |
+
             cypress/e2e/cadastro-sucesso.cy.js
+
             cypress/e2e/login-api.cy.js
+
             cypress/e2e/dashboard.cy.js
+
           wait-on: 'http://localhost:3000,http://localhost:8080'
-        env:
-          # ADICIONE AQUI AS VARIÁVEIS QUE O CYPRESS PRECISA
-          # A action do Cypress requer o prefixo "CYPRESS_"
-          CYPRESS_email: ${{ secrets.EMAIL_TESTE }}         # Exemplo
-          CYPRESS_password: ${{ secrets.SENHA_TESTE }}       # Exemplo
-          CYPRESS_api_login: "http://localhost:8080/auth/login"
-          CYPRESS_api_clinica: "http://localhost:8080/clinica" # Exemplo
