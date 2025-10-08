@@ -8,36 +8,28 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     containers: [1, 2]
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Start Server BackEnd
-
+        # <-- CORREÇÃO: A propriedade abaixo já faz o 'cd server' para você.
+        working-directory: server
         run: |
-
-          cd server
+          # <-- CORREÇÃO: Esta linha foi removida.
+          # cd server 
 
           npm install
-
-          # Compile TypeScript first
           npm run compile
-
-          # Start server in background
           npm start &
-
-          # Wait for server to start with timeout
+          
           echo "Waiting for server to start..."
           timeout=60
           counter=0
           until [ "$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)" == "200" ]; do
             if [ $counter -ge $timeout ]; then
               echo "Server failed to start within $timeout seconds"
-              echo "Checking server logs..."
               ps aux | grep node
               exit 1
             fi
@@ -45,25 +37,24 @@ jobs:
             sleep 2
             counter=$((counter + 2))
           done
-
           echo "Server is running successfully."
 
-        working-directory: server
-
       - name: Start Web App FrontEnd
+        # <-- CORREÇÃO: Adicionamos a propriedade working-directory para o frontend.
+        working-directory: web
         run: |
-          cd web
+          # <-- CORREÇÃO: Esta linha foi removida.
+          # cd web
+          
           npm install
           npm start &
           
-          # Wait for frontend to start with timeout
           echo "Waiting for frontend to start..."
           timeout=60
           counter=0
           until [ "$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000)" == "200" ]; do
             if [ $counter -ge $timeout ]; then
               echo "Frontend failed to start within $timeout seconds"
-              echo "Checking frontend logs..."
               ps aux | grep node
               exit 1
             fi
@@ -81,20 +72,10 @@ jobs:
           echo "🎉 All services are ready for testing!"
 
       - name: Run Cypress Tests
-
         uses: cypress-io/github-action@v6
-
         with:
           spec: |
-
             cypress/e2e/cadastro-sucesso.cy.js
-
             cypress/e2e/login-api.cy.js
-
             cypress/e2e/dashboard.cy.js
-
           wait-on: 'http://localhost:3000,http://localhost:8080'
-          # record: true
-          # parallel: true
-          # ci-build-id: ${{ github.sha }}-${{ matrix.containers }}
-          # group: ${{ matrix.containers }}-containers
