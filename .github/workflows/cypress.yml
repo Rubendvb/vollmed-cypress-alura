@@ -8,9 +8,9 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        containers: [1, 2]
+    # strategy:
+    #   matrix:
+    #     containers: [1, 2]
 
     steps:
       - name: Checkout
@@ -24,39 +24,23 @@ jobs:
         with:
           path: server
 
-      - name: Start Server BackEnd
-
+      - name: Start API Server with Docker Compose
         run: |
-
-          cd server
-
-          npm install
-
-          # Compile TypeScript first
-          npm run compile
-
-          # Start server in background
-          npm start &
-
-          # Wait for server to start with timeout
-          echo "Waiting for server to start..."
+          docker-compose up -d api
+          # Wait for server to be ready
           timeout=60
           counter=0
           until [ "$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)" == "200" ]; do
             if [ $counter -ge $timeout ]; then
               echo "Server failed to start within $timeout seconds"
-              echo "Checking server logs..."
-              ps aux | grep node
+              docker-compose logs api
               exit 1
             fi
             echo "Waiting for server to start... ($counter/$timeout)"
             sleep 2
             counter=$((counter + 2))
           done
-
           echo "Server is running successfully."
-
-        working-directory: server
 
       - name: Start Web App FrontEnd
 
